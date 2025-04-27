@@ -6,7 +6,7 @@ const router = express.Router();
 // Get all messages
 router.get("/", async (req, res) => {
   try {
-    const messages = await MessageModel.find().sort({ timestamp: -1 });
+    const messages = await MessageModel.find();
     res.json(messages);
   } catch (error) {
     res.status(500).json({

@@ -1,0 +1,17 @@
+services:
+  chat-server:
+    image: us-central1-docker.pkg.dev/cloudrun-workshop-2025/docker-images/saran-server:latest
+    build:
+      context: .
+      dockerfile: apps/chat-server/Dockerfile
+    ports:
+      - 3000:3000
+
+  chat-web:
+    platform: linux/amd64
+    image: us-central1-docker.pkg.dev/cloudrun-workshop-2025/docker-images/saran-client:latest
+    build:
+      context: .
+      dockerfile: apps/chat-web/Dockerfile
+    ports:
+      - 3001:3001

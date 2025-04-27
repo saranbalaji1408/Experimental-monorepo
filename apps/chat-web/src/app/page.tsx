@@ -1,11 +1,16 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { Box, VStack, useToast, Container, Heading } from '@chakra-ui/react';
-import MessageList from '../components/MessageList';
-import MessageInput from '../components/MessageInput';
-import { fetchMessages, createMessage, deleteMessage, Message } from '../services/messageService';
-import { ChakraProvider } from '@chakra-ui/react';
+import React, { useEffect, useState } from "react";
+import { Box, VStack, useToast, Container, Heading } from "@chakra-ui/react";
+import MessageList from "../components/MessageList";
+import MessageInput from "../components/MessageInput";
+import {
+  fetchMessages,
+  createMessage,
+  deleteMessage,
+  Message,
+} from "../services/messageService";
+import { ChakraProvider } from "@chakra-ui/react";
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -21,10 +26,6 @@ export default function Home() {
 
   useEffect(() => {
     loadMessages();
-    
-    // Poll for new messages every 5 seconds
-    const interval = setInterval(loadMessages, 5000);
-    return () => clearInterval(interval);
   }, []);
 
   const handleSendMessage = async (sender: string, content: string) => {
@@ -32,15 +33,15 @@ export default function Home() {
     if (newMessage) {
       setMessages([...messages, newMessage]);
       toast({
-        title: 'Message sent',
-        status: 'success',
+        title: "Message sent",
+        status: "success",
         duration: 2000,
         isClosable: true,
       });
     } else {
       toast({
-        title: 'Failed to send message',
-        status: 'error',
+        title: "Failed to send message",
+        status: "error",
         duration: 2000,
         isClosable: true,
       });
@@ -50,17 +51,17 @@ export default function Home() {
   const handleDeleteMessage = async (id: string) => {
     const success = await deleteMessage(id);
     if (success) {
-      setMessages(messages.filter(message => message._id !== id));
+      setMessages(messages.filter((message) => message._id !== id));
       toast({
-        title: 'Message deleted',
-        status: 'success',
+        title: "Message deleted",
+        status: "success",
         duration: 2000,
         isClosable: true,
       });
     } else {
       toast({
-        title: 'Failed to delete message',
-        status: 'error',
+        title: "Failed to delete message",
+        status: "error",
         duration: 2000,
         isClosable: true,
       });
@@ -75,22 +76,19 @@ export default function Home() {
             Chat Application
           </Heading>
           <VStack spacing={8} align="stretch">
-            <Box 
-              borderWidth="1px" 
-              borderRadius="lg" 
+            <Box
+              borderWidth="1px"
+              borderRadius="lg"
               overflow="hidden"
               boxShadow="md"
               bg="white"
             >
-              <MessageList 
-                messages={messages} 
-                onDelete={handleDeleteMessage} 
-              />
+              <MessageList messages={messages} onDelete={handleDeleteMessage} />
             </Box>
-            
-            <Box 
-              borderWidth="1px" 
-              borderRadius="lg" 
+
+            <Box
+              borderWidth="1px"
+              borderRadius="lg"
               p={4}
               boxShadow="md"
               bg="white"

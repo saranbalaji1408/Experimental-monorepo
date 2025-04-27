@@ -14,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
+// Check if we're running in the same container as MongoDB or connecting to a separate service
 const mongoUri =
   process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/chat-app";
 console.log("Attempting to connect to MongoDB at:", mongoUri);
